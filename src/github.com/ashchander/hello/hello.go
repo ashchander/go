@@ -1,0 +1,30 @@
+package main
+
+import "fmt"
+
+type Salutation struct {
+    name string
+    greeting string
+}
+
+const (
+    PI = 3.14
+    Language = "GO"
+)
+
+const (
+    A = iota
+    B
+    C
+)
+
+func main() {
+    var s = Salutation{}
+    s.name = "Bob"
+
+    fmt.Println(PI)
+    fmt.Println(Language)
+    fmt.Println(A)
+    fmt.Println(B)
+    fmt.Println(C)
+}
