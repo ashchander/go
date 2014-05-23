@@ -7,24 +7,36 @@ type Salutation struct {
     greeting string
 }
 
-const (
-    PI = 3.14
-    Language = "GO"
-)
+type Printer func(string) () 
 
-const (
-    A = iota
-    B
-    C
-)
+func Greet(salutation Salutation, do Printer) {
+    message, alternate := CreateMessage(salutation.name, salutation.greeting, "yo")
+    do(message)
+    do(alternate)
+}
+
+func CreateMessage(name string, greeting ...string) (message string, alternate string) {
+    message = greeting[1] + " " + name
+    alternate = "Hey! " + name
+    return
+}
+
+func Print(s string) {
+    fmt.Print(s)
+}
+
+func PrintLine(s string) {
+    fmt.Println(s)
+}
+
+func CreatePrintFunction(custom string) Printer {
+    return func(s string) {
+        fmt.Println(s + custom)
+    }
+}
 
 func main() {
-    var s = Salutation{}
-    s.name = "Bob"
+    var s = Salutation{"Bob", "Hello"}
 
-    fmt.Println(PI)
-    fmt.Println(Language)
-    fmt.Println(A)
-    fmt.Println(B)
-    fmt.Println(C)
+    Greet(s, CreatePrintFunction("?"))
 }
